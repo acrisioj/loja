@@ -17,6 +17,8 @@ import br.com.loja.jpa.controller.exceptions.NonexistentEntityException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
@@ -212,6 +214,22 @@ public class BairroJpaController implements Serializable {
         try {
             return em.find(Bairro.class, id);
         } finally {
+            em.close();
+        }
+    }
+    
+    public List<Bairro> findqtdBairroBySer() {
+        EntityManager em = getEntityManager();
+       try{
+           Query q = null;
+        try {            
+            q = em.createNamedQuery("Bairro.qtdBairroBySer", Bairro.class);            
+        }catch(Exception ex){
+            Logger.getLogger(BairroJpaController.class.getName()).log(Level.SEVERE,null,ex);
+        }
+        return q.getResultList();
+       }        
+        finally {
             em.close();
         }
     }

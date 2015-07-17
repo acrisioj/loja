@@ -6,6 +6,7 @@ import br.com.loja.jsf.controller.util.PaginationHelper;
 import br.com.loja.jpa.controller.BairroJpaController;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -224,5 +225,11 @@ public class BairroController implements Serializable {
                 throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Bairro.class.getName());
             }
         }
+    }
+    
+    public List findAllBairro(){
+        
+        return getJpaController().findBairroEntities(); 
+        
     }
 }
